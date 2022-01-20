@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<!--Extra features:
+Impossible bot
+Visible cards
+Bot logic (will pick up until score is above the players)-->
+
+<!--title-->
+<title>Blackjack</title>
+<!--Links for icon and stylesheet-->
+<head>
+    <link rel="icon" href="blackjack.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<script>
+    //variables to save cards/scores/points/impossible bot status/card suits
+    var playerCardNum = 0;
+    var botCardNum = 0;
+    var playerPoints = 0;
+    var botPoints = 0;
+    var playerScore = 0;
+    var botScore = 0;
+    var impossibleBot = false;
+    const suits = ["Spades", "Diamonds", "Hearts", "Clubs"]
+    //loads other code to gets random card for the player and display it, checks if score is above 21
+    function hit() {
+        
+        var playerCard = pickCard();
+        displayCard(playerCard, "playerCard")
+        if (playerCard > 10) {
+                playerCard = 10
+            } else {
+            }
+
+        playerScore += playerCard;
+        document.getElementById("playerScoreDisplay").value = playerScore;
+
+        if (playerScore > 21) {
+            gameEnd("lose");
+        }
+
+    }   
+    //displays the given cards for player and bot
+    function displayCard(cardPicked, pickedBy) {
+
+        if (pickedBy == "playerCard") {
+            playerCardNum++;
+        } else {
+            botCardNum++;
+        }
+
+        var suit = suits[Math.floor(Math.random()*4)]
+
+        if (pickedBy == "playerCard") {
+            document.getElementById(pickedBy + "Image" + playerCardNum).src = "deck/" + suit + "/" + cardPicked + ".png";
+        } else {
+            document.getElementById(pickedBy + "Image" + botCardNum).src = "deck/" + suit + "/" + cardPicked + ".png";
+        }
+
+        if (cardPicked == 13) {
+            document.getElementById(pickedBy + "Display").value = "King of " + suit;
+        } else if (cardPicked == 12) {
+            document.getElementById(pickedBy + "Display").value = "Queen of " + suit;
+        } else if (cardPicked == 11) {
+            document.getElementById(pickedBy + "Display").value = "Jack of " + suit;
+        } else if (cardPicked == 1) {
+            document.getElementById(pickedBy + "Display").value = "Ace of " + suit;
+        } else {
+            document.getElementById(pickedBy + "Display").value = cardPicked + " of " + suit;
+        }
+
+    }
+
+    //ends player turn, disabling the buttonns and runs the bot code
+    function stand() {
+
+        disableButtons();
+        botDecision();
+
+    }
+    //determines if the normal or impossible bot code runs
+    function botDecision() {
+
+        if (impossibleBot == false) {
+            bot();
+        } else {
+            unbeatableBot();
+        }
+
+    }
+    //impossible to beat bot code
+    function unbeatableBot() {
+
+        while (botScore <= (playerScore - 10)) {
+            var botCard = pickCard();
+            displayCard(botCard, "botCard");
+
+            if (botCard > 10) {
+                botCard = 10;
+        }
+
+            botScore += botCard;
+            document.getElementById("botScoreDisplay").value = botScore;
+        }
+        
+        if (playerScore == 21) {
+            botCard = (21 - botScore);
+            displayCard(botCard, "botCard");
+            botScore += botCard;
+        } else {
+            botCard = Math.floor(Math.random() * (21 - playerScore) + 1) + playerScore;
+            botCard -= botScore;
+            displayCard(botCard, "botCard");
+            botScore += botCard;
+        }
+
+        document.getElementById("botScoreDisplay").value = botScore;
+
+        if (botScore > playerScore && botScore <= 21) {
+            gameEnd("lose");
+        } else if (botScore < playerScore || botScore > 21) {
+            gameEnd("win");
+        } else if (botScore == playerScore) {
+            gameEnd("tie");
+        }
+    }
+    //normal bot turn code
+    function bot() {
+        
+        while (botScore < playerScore || (playerScore == botScore && botScore <= 11)) {
+            
+            var botCard = pickCard();
+            displayCard(botCard, "botCard")
+
+            if (botCard > 10) {
+                botCard = 10
+        }
+            botScore += botCard;    
+            document.getElementById("botScoreDisplay").value = botScore;
+        }
+        
+        
+        if (botScore > playerScore && botScore <= 21) {
+            gameEnd("lose");
+        } else if (botScore < playerScore || botScore > 21) {
+            gameEnd("win");
+        } else if (botScore == playerScore) {
+            gameEnd("tie");
+        }
+
+    }
+    //resets the scores for a new game
+    function resetScores() {
+
+        playerCardNum = 0;
+        botCardNum = 0;
+        playerScore = 0;
+        botScore = 0; 
+        playerPoints = 0;
+        botPoints = 0;
+        document.getElementById("playerCardDisplay").value = "";
+        document.getElementById("playerScoreDisplay").value = "";
+        document.getElementById("botCardDisplay").value = "";
+        document.getElementById("botScoreDisplay").value = "";
+        document.getElementById("hitButton").disabled = false;
+        document.getElementById("standButton").disabled = false;
+        document.getElementById("playerPointsDisplay").value = "";
+        document.getElementById("botPointsDisplay").value = "";
+        document.getElementById("nextGameButton").style.visibility = "hidden";
+        document.getElementById("winLoseDisplay").innerHTML = "You...";
+
+        for (i=1; i <=10; i++) {
+            document.getElementById("playerCardImage" + i).src = "deck/backside/backside1.png";
+            if (i == 10) {
+                for (i=1; i <=10; i++) {
+                document.getElementById("botCardImage" + i).src = "deck/backside/backside1.png";
+                }
+            }
+        }
+        
+    }
+    //returns random number for the card
+    function pickCard() {
+
+        return Math.floor(Math.random()*13)+1
+
+    }
+    //ends the game, changes score and displays whether you win, lose, or tie based off the state
+    function gameEnd(state) {
+
+        disableButtons();
+        document.getElementById("nextGameButton").style.visibility = "visible";
+
+        if (state == "lose") {
+            document.getElementById("winLoseDisplay").innerHTML = "You Lost";
+            botPoints ++;
+            document.getElementById("botPointsDisplay").value = botPoints;
+        } else if (state == "win") {
+            document.getElementById("winLoseDisplay").innerHTML = "You Won";
+            playerPoints ++;
+            document.getElementById("playerPointsDisplay").value = playerPoints;
+        } else if (state == "tie") {
+            document.getElementById("winLoseDisplay").innerHTML = "You Tied";
+            botPoints += 0.5;
+            playerPoints += 0.5;
+            document.getElementById("playerPointsDisplay").value = playerPoints;
+            document.getElementById("botPointsDisplay").value = botPoints;
+        }
+
+    }
+    //disables the hit and stand buttons for the bots turn
+    function disableButtons() {
+
+        document.getElementById("hitButton").disabled = true;
+        document.getElementById("standButton").disabled = true;
+
+    }
+    //hides the impossible bot button
+    const hideButton = function () {
+
+        document.getElementById("iBot").style.visibility = "hidden";
+
+    }
+    //resets cards for next round
+    function nextGame() {
+
+        playerCardNum = 0;
+        botCardNum = 0;
+        playerScore = 0;
+        botScore = 0;  
+        document.getElementById("playerCardDisplay").value = "";
+        document.getElementById("playerScoreDisplay").value = "";
+        document.getElementById("botCardDisplay").value = "";
+        document.getElementById("botScoreDisplay").value = "";
+        document.getElementById("hitButton").disabled = false;
+        document.getElementById("standButton").disabled = false;
+        document.getElementById("nextGameButton").style.visibility = "hidden";
+
+        for (i=1; i <=10; i++) {
+            document.getElementById("playerCardImage" + i).src = "deck/backside/backside1.png";
+            if (i == 10) {
+                for (i=1; i <=10; i++) {
+                    document.getElementById("botCardImage" + i).src = "deck/backside/backside1.png";
+                }
+            }
+        }
+    }
+</script>
+<!--creates cards, buttons, and text displays-->
+<form name="buttons">
+    <p id="cardsName">Your Cards:</p>
+    <img id="playerCardImage1" src="" height="150">
+    <img id="playerCardImage2" src="" height="150">
+    <img id="playerCardImage3" src="" height="150">
+    <img id="playerCardImage4" src="" height="150">
+    <img id="playerCardImage5" src="" height="150">
+    <img id="playerCardImage6" src="" height="150">
+    <img id="playerCardImage7" src="" height="150">
+    <img id="playerCardImage8" src="" height="150">
+    <img id="playerCardImage9" src="" height="150">
+    <img id="playerCardImage10" src="" height="150"><br>
+    <p id="cardsName">Bot Cards:</p>
+    <img id="botCardImage1" src="" height="150">
+    <img id="botCardImage2" src="" height="150">
+    <img id="botCardImage3" src="" height="150">
+    <img id="botCardImage4" src="" height="150">
+    <img id="botCardImage5" src="" height="150">
+    <img id="botCardImage6" src="" height="150">    
+    <img id="botCardImage7" src="" height="150">
+    <img id="botCardImage8" src="" height="150">
+    <img id="botCardImage9" src="" height="150">
+    <img id="botCardImage10" src="" height="150"><br>
+
+    <input type="button" value="hit" id="hitButton" onClick="hit();">
+    <input type="button" Value="stand" id="standButton" onClick="stand();">
+    <input type="button" Value="next game" id="nextGameButton" onClick="nextGame();">
+    <input type="button" Value="reset" id="resetButton" onClick="resetScores(); hideButton();">
+    <input type="button" id="iBot" value="Enable Impossible Bot mode" onClick="impossibleBot = true; this.style.visibility = 'hidden'"><br><br><br>
+ <p id="playerDisplays">
+    Player Card: <input type="text" id="playerCardDisplay" readonly>
+
+    Player Score: <input type="text" id="playerScoreDisplay" readonly>
+</p>
+<p id="botDisplays">
+    Bot Card: <input type="text" id="botCardDisplay" readonly>
+
+    Bot Score: <input type="text" id="botScoreDisplay" readonly> 
+</p>
+    <p id="winLoseDisplay">You...</p>
+    <p id="pointsDisplays">
+    Your Wins: <input type="text" id="playerPointsDisplay" readonly>
+
+    Bot Wins: <input type="text" id="botPointsDisplay" readonly><br>
+    </p>
+</form>
+<!--sets cards, text displays, and buttons to starting state-->
+<script>
+    document.getElementById("playerCardDisplay").value = "";
+    document.getElementById("playerScoreDisplay").value = "";
+    document.getElementById("botCardDisplay").value = "";
+    document.getElementById("botScoreDisplay").value = "";
+    document.getElementById("playerPointsDisplay").value = "";
+    document.getElementById("botPointsDisplay").value = "";
+    document.getElementById("nextGameButton").style.visibility = "hidden";
+
+    for (i=1; i <=10; i++) {
+    document.getElementById("playerCardImage" + i).src = "deck/backside/backside1.png";
+        if (i == 10) {
+            for (i=1; i <=10; i++) {
+            document.getElementById("botCardImage" + i).src = "deck/backside/backside1.png";
+            }
+        }
+    }
+    </script>

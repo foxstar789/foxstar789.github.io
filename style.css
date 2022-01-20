@@ -1,0 +1,164 @@
+/*style for header*/
+header {
+    margin-bottom: 120px;
+    font-size: 120px;   
+}
+/*Style for button that links to blackjack game page*/
+input[id=blackjackSelectButton] {
+    background-color: white;
+    border: 3px solid #4CAF50;
+    border-radius: 6px;
+    color: #4CAF50;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 80px;
+}
+/*Style for hit, stand, and next game buttons for blackjack game*/
+input[id=hitButton], [id=standButton], [id=nextGameButton] {
+    background-color: white;
+    border: 3px solid #4CAF50;
+    border-radius: 6px;
+    color: #4CAF50;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+/*style for hovering over hit button*/
+input:hover[id=hitButton] {
+    background-color: #4CAF50;
+    color: white;
+}
+/*Style for hovering over stand button*/
+input:hover[id=standButton] {
+    background-color: #4CAF50;
+    color: white;
+}
+/*Style for disabled hit button*/
+input:disabled[id=hitButton] {
+    background-color: red;
+    color: white;
+}
+/*Style for disabled stand button*/
+input:disabled[id=standButton] {
+    background-color: red;
+    color: white;
+}
+/*Style for hovering over next game button*/
+input:hover[id=nextGameButton] {
+    background-color: #4CAF50;
+    color: white;
+}
+/*Style for reset button*/
+input[id=resetButton] {
+    background-color: white;
+    border: 3px solid red;
+    border-radius: 6px;
+    color: red; 
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+/*Style for hovering over reset button*/
+input:hover[id=resetButton] {
+    background-color: red;
+    color: white;
+}
+/*Style for impossible bot button*/
+input[id=iBot] {
+    background-color: #000000;
+    border: 4px solid red;
+    border-radius: 6px;
+    color: red;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+/*Style for hovering over impossible bot button*/
+input:hover[id=iBot] {
+    background-color: red;
+    color: black;   
+}
+/*Style for body*/
+body {
+    background-image: url('background.jpg');
+  }
+/*Style for html*/
+html {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
+/*Style for images*/
+img {
+    border-radius: 3px;
+}
+/*Style for text inputs used for displaying scores/cards/wins/*/
+input[type=text] {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+}
+/*Style for win/lose display*/
+p[id=winLoseDisplay] {
+    text-align: center;
+}
+
+p[id=cardsName] {
+    padding: 8px; 
+    border: 4px solid rgba(255, 0, 0, 0.623); 
+    border-radius: 6px;
+    background-color: green;
+    margin-left: 850px; 
+    margin-right: 850px;
+    margin-top: 10px;
+    margin-bottom: 18px;
+}
+
+p[id=playerDisplays] {
+    padding: 8px; 
+    border: 4px solid rgba(255, 0, 0, 0.623);
+    border-radius: 6px;
+    background-color: green;
+    margin-left: 390px;
+    margin-right: 390px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+p[id=botDisplays] {
+    padding: 8px; 
+    border: 4px solid rgba(255, 0, 0, 0.623);
+    border-radius: 6px;
+    background-color: green;
+    margin-left: 426px;
+    margin-right: 426px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+p[id=winLoseDisplay] {
+    padding: 8px; 
+    border: 4px solid rgba(255, 0, 0, 0.623);
+    border-radius: 6px;
+    background-color: green;
+    margin-left: 850px;
+    margin-right: 850px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+p[id=pointsDisplays] {
+    padding: 8px; 
+    border: 4px solid rgba(255, 0, 0, 0.623);
+    border-radius: 6px;
+    background-color: green;
+    margin-left: 420px;
+    margin-right: 420px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--Title on tab-->
+<title>Menu</title>
+<!--links to stylesheet-->
+<head>
+    <link rel="icon" href="blackjack.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<!--Title at top of page-->
+<body>
+    <header>My Game</header>
+    <h1>How to play</h1>
+    <h2>
+        Click the "hit" button to draw a new card.<br>
+        Get to a total score as close to 21 without going over.<br>
+        Click the "stand" button when you think you have a good score.<br>
+        This will end your turn and the bot will play.<br>
+        It will display whether you win/lose and your score below.<br>
+        Enjoy!
+    </h2>
+</body>
+<!--Button for the blackjack game-->
+<form>
+    <input type="button" value="Play BlackJack" id="blackjackSelectButton">
+</form>
+<!--Link button to the blackjack game-->
+<script>
+    document.getElementById("blackjackSelectButton").onclick = function () {
+        location.href = "BlackJack.html";
+    };
+</script>
