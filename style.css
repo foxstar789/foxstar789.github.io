@@ -108,7 +108,7 @@ input[type=text] {
 p[id=winLoseDisplay] {
     text-align: center;
 }
-
+/*Style for border around the display for whose cards are which*/
 p[id=cardsName] {
     padding: 8px; 
     border: 4px solid rgba(255, 0, 0, 0.623); 
@@ -119,7 +119,7 @@ p[id=cardsName] {
     margin-top: 10px;
     margin-bottom: 18px;
 }
-
+/*Style for player card and score displays*/
 p[id=playerDisplays] {
     padding: 8px; 
     border: 4px solid rgba(255, 0, 0, 0.623);
@@ -130,7 +130,7 @@ p[id=playerDisplays] {
     margin-top: 0px;
     margin-bottom: 20px;
 }
-
+/*Style for bot card and score displays*/
 p[id=botDisplays] {
     padding: 8px; 
     border: 4px solid rgba(255, 0, 0, 0.623);
@@ -141,7 +141,7 @@ p[id=botDisplays] {
     margin-top: 0px;
     margin-bottom: 20px;
 }
-
+/*Style for win/lose displays*/
 p[id=winLoseDisplay] {
     padding: 8px; 
     border: 4px solid rgba(255, 0, 0, 0.623);
@@ -152,6 +152,7 @@ p[id=winLoseDisplay] {
     margin-top: 0px;
     margin-bottom: 20px;
 }
+/*Style for player/bot wins counter displays*/
 p[id=pointsDisplays] {
     padding: 8px; 
     border: 4px solid rgba(255, 0, 0, 0.623);
