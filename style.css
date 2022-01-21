@@ -128,8 +128,10 @@ p[id=playerDisplays] {
     border: 4px solid rgba(255, 0, 0, 0.623);
     border-radius: 6px;
     background-color: green;
-    margin-left: 390px;
-    margin-right: 390px;
+    position: relative;
+    left: 50%;
+    width: 1100px;
+    transform: translate(-50%, -50%);
     margin-top: 0px;
     margin-bottom: 20px;
 }
@@ -139,8 +141,10 @@ p[id=botDisplays] {
     border: 4px solid rgba(255, 0, 0, 0.623);
     border-radius: 6px;
     background-color: green;
-    margin-left: 426px;
-    margin-right: 426px;
+    position: relative;
+    left: 50%;
+    width: 1100px;
+    transform: translate(-50%, -50%);
     margin-top: 0px;
     margin-bottom: 20px;
 }
@@ -150,8 +154,10 @@ p[id=winLoseDisplay] {
     border: 4px solid rgba(255, 0, 0, 0.623);
     border-radius: 6px;
     background-color: green;
-    margin-left: 850px;
-    margin-right: 850px;
+    position: relative;
+    left: 50%;
+    width: 150px;
+    transform: translate(-50%, -50%);
     margin-top: 0px;
     margin-bottom: 20px;
 }
@@ -161,8 +167,10 @@ p[id=pointsDisplays] {
     border: 4px solid rgba(255, 0, 0, 0.623);
     border-radius: 6px;
     background-color: green;
-    margin-left: 420px;
-    margin-right: 420px;
+    position: relative;
+    left: 50%;
+    width: 1100px;
+    transform: translate(-50%, -50%);
     margin-top: 0px;
     margin-bottom: 20px;
 }
