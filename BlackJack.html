@@ -111,6 +111,9 @@ Bot logic (will pick cards until score is equal to or above the players)-->
             botScore += botCard;
         } else {
             botCard = Math.floor(Math.random() * (21 - playerScore) + 1) + playerScore;
+            while (botCard > 13) {
+                botCard = Math.floor(Math.random() * (21 - playerScore) + 1) + playerScore;
+            }
             botCard -= botScore;
             displayCard(botCard, "botCard");
             botScore += botCard;
